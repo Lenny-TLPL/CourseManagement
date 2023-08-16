@@ -1,0 +1,14 @@
+H:\PRN221\CourseManagement\CourseManangementModels\bin\Debug\net6.0\CourseManangementModels.deps.json
+H:\PRN221\CourseManagement\CourseManangementModels\bin\Debug\net6.0\CourseManangementModels.runtimeconfig.json
+H:\PRN221\CourseManagement\CourseManangementModels\bin\Debug\net6.0\CourseManangementModels.dll
+H:\PRN221\CourseManagement\CourseManangementModels\bin\Debug\net6.0\CourseManangementModels.pdb
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.csproj.AssemblyReference.cache
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.GeneratedMSBuildEditorConfig.editorconfig
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.AssemblyInfoInputs.cache
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.AssemblyInfo.cs
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.csproj.CoreCompileInputs.cache
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.dll
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\refint\CourseManangementModels.dll
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.pdb
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\CourseManangementModels.genruntimeconfig.cache
+H:\PRN221\CourseManagement\CourseManangementModels\obj\Debug\net6.0\ref\CourseManangementModels.dll
