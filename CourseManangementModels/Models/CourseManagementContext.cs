@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace CourseManangementModels.Models
 {
@@ -28,39 +27,38 @@ namespace CourseManangementModels.Models
         public virtual DbSet<StudentInCourse> StudentInCourses { get; set; } = null!;
         public virtual DbSet<Subject> Subjects { get; set; } = null!;
         public virtual DbSet<SubjectInMajor> SubjectInMajors { get; set; } = null!;
+        public virtual DbSet<SubjectTeach> SubjectTeaches { get; set; } = null!;
         public virtual DbSet<Teacher> Teachers { get; set; } = null!;
+        public virtual DbSet<UserBasic> UserBasics { get; set; } = null!;
 
-        private String GetConnection()
-        {
-            IConfiguration configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
-            return configuration.GetConnectionString("CourseManagement");
-        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(GetConnection());
+                optionsBuilder.UseSqlServer("Server=VN-PF3M2A10;Database=CourseManagement;Trusted_Connection=True;");
             }
         }
-
-        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Attendance>(entity =>
             {
+                entity.HasNoKey();
+
                 entity.ToTable("Attendance");
 
                 entity.HasOne(d => d.Session)
-                    .WithMany(p => p.Attendances)
+                    .WithMany()
                     .HasForeignKey(d => d.SessionId)
-                    .HasConstraintName("FK__Attendanc__Sessi__4222D4EF");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Attendanc__Sessi__49C3F6B7");
 
                 entity.HasOne(d => d.Student)
-                    .WithMany(p => p.Attendances)
+                    .WithMany()
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__Attendanc__Stude__412EB0B6");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Attendanc__Stude__48CFD27E");
             });
 
             modelBuilder.Entity<Course>(entity =>
@@ -76,17 +74,19 @@ namespace CourseManangementModels.Models
                 entity.HasOne(d => d.Semester)
                     .WithMany(p => p.Courses)
                     .HasForeignKey(d => d.SemesterId)
-                    .HasConstraintName("FK__Course__Semester__31EC6D26");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Course__Semester__37A5467C");
 
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.Courses)
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__Course__SubjectI__32E0915F");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Course__SubjectI__38996AB5");
 
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.Courses)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__Course__TeacherI__30F848ED");
+                    .HasConstraintName("FK__Course__TeacherI__36B12243");
             });
 
             modelBuilder.Entity<CoursePrerequisite>(entity =>
@@ -98,12 +98,12 @@ namespace CourseManangementModels.Models
                 entity.HasOne(d => d.Course)
                     .WithMany()
                     .HasForeignKey(d => d.CourseId)
-                    .HasConstraintName("FK__CoursePre__Cours__440B1D61");
+                    .HasConstraintName("FK__CoursePre__Cours__3A81B327");
 
-                entity.HasOne(d => d.PrerequisiteNavigation)
+                entity.HasOne(d => d.Prerequisite)
                     .WithMany()
-                    .HasForeignKey(d => d.Prerequisite)
-                    .HasConstraintName("FK__CoursePre__Prere__44FF419A");
+                    .HasForeignKey(d => d.PrerequisiteId)
+                    .HasConstraintName("FK__CoursePre__Prere__3B75D760");
             });
 
             modelBuilder.Entity<Major>(entity =>
@@ -142,17 +142,19 @@ namespace CourseManangementModels.Models
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Sessions)
                     .HasForeignKey(d => d.CourseId)
-                    .HasConstraintName("FK__Session__CourseI__35BCFE0A");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Session__CourseI__3E52440B");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Sessions)
                     .HasForeignKey(d => d.RoomId)
-                    .HasConstraintName("FK__Session__RoomId__37A5467C");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Session__RoomId__403A8C7D");
 
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.Sessions)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__Session__Teacher__36B12243");
+                    .HasConstraintName("FK__Session__Teacher__3F466844");
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -162,8 +164,6 @@ namespace CourseManangementModels.Models
                 entity.Property(e => e.Address).HasMaxLength(255);
 
                 entity.Property(e => e.Birthday).HasColumnType("date");
-
-                entity.Property(e => e.Email).HasMaxLength(225);
 
                 entity.Property(e => e.GraduationDate).HasColumnType("datetime");
 
@@ -177,26 +177,34 @@ namespace CourseManangementModels.Models
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.MajorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Student__MajorId__3A81B327");
+                    .HasConstraintName("FK__Student__MajorId__4316F928");
+
+                entity.HasOne(d => d.UserBasic)
+                    .WithMany(p => p.Students)
+                    .HasForeignKey(d => d.UserBasicId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Student__UserBas__440B1D61");
             });
 
             modelBuilder.Entity<StudentInCourse>(entity =>
             {
+                entity.HasNoKey();
+
                 entity.ToTable("StudentInCourse");
 
                 entity.Property(e => e.Gpa).HasColumnName("GPA");
 
-                entity.Property(e => e.MajorName).HasMaxLength(255);
-
                 entity.HasOne(d => d.Course)
-                    .WithMany(p => p.StudentInCourses)
+                    .WithMany()
                     .HasForeignKey(d => d.CourseId)
-                    .HasConstraintName("FK__StudentIn__Cours__3E52440B");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__StudentIn__Cours__46E78A0C");
 
                 entity.HasOne(d => d.Student)
-                    .WithMany(p => p.StudentInCourses)
+                    .WithMany()
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentIn__Stude__3D5E1FD2");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__StudentIn__Stude__45F365D3");
             });
 
             modelBuilder.Entity<Subject>(entity =>
@@ -217,23 +225,57 @@ namespace CourseManangementModels.Models
                 entity.HasOne(d => d.Major)
                     .WithMany()
                     .HasForeignKey(d => d.MajorId)
-                    .HasConstraintName("FK__SubjectIn__Major__2D27B809");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__SubjectIn__Major__32E0915F");
 
                 entity.HasOne(d => d.Subject)
                     .WithMany()
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__SubjectIn__Subje__2E1BDC42");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__SubjectIn__Subje__33D4B598");
+            });
+
+            modelBuilder.Entity<SubjectTeach>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("SubjectTeach");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany()
+                    .HasForeignKey(d => d.SubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__SubjectTe__Subje__30F848ED");
+
+                entity.HasOne(d => d.Teacher)
+                    .WithMany()
+                    .HasForeignKey(d => d.TeacherId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__SubjectTe__Teach__300424B4");
             });
 
             modelBuilder.Entity<Teacher>(entity =>
             {
                 entity.ToTable("Teacher");
 
-                entity.Property(e => e.Email).HasMaxLength(225);
-
                 entity.Property(e => e.Name).HasMaxLength(225);
 
                 entity.Property(e => e.Phone).HasMaxLength(1);
+
+                entity.HasOne(d => d.UserBasic)
+                    .WithMany(p => p.Teachers)
+                    .HasForeignKey(d => d.UserBasicId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Teacher__UserBas__2A4B4B5E");
+            });
+
+            modelBuilder.Entity<UserBasic>(entity =>
+            {
+                entity.ToTable("UserBasic");
+
+                entity.Property(e => e.Email).HasMaxLength(255);
+
+                entity.Property(e => e.Password).HasMaxLength(255);
             });
 
             OnModelCreatingPartial(modelBuilder);
