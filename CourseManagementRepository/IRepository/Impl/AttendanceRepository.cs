@@ -11,36 +11,63 @@ namespace CourseManagementRepository.IRepository.Impl
     public class AttendanceRepository : IAttendanceRepository
     {
         private readonly CourseManagementContext _context;
-        private readonly DbSet<Major> _dbSet;
+        private readonly DbSet<Attendance> _dbSet;
 
         public AttendanceRepository()
         {
             _context = new CourseManagementContext();
-            _dbSet = _context.Set<Major>();
+            _dbSet = _context.Set<Attendance>();
         }
-        public void Create(Major entity)
+        public void Create(Attendance entity)
         {
             _dbSet.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Delete(Major entity)
+        public void Delete(Attendance entity)
         {
             _dbSet.Remove(entity);
             _context.SaveChanges();
         }
 
-        public IEnumerable<Major> GetAll()
+        public IEnumerable<Attendance> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet
+                .Include(a => a.Student)
+                .Include(a => a.Session)
+                .ToList();
         }
 
-        public Major GetById(int id)
+        public List<Attendance> GetAttendancesBySessionId(int sessionId)
         {
-            return _dbSet.SingleOrDefault(attendance => attendance.Id == id);
+            return _dbSet
+                .Include(a => a.Student)
+                .Include(a => a.Session)
+                .Where(attendance => attendance.SessionId == sessionId).ToList();
         }
 
-        public void Update(Major entity)
+        public List<Attendance> GetAttendancesByStudentIdInCourse(int studentId, int courseId)
+        {
+            return _dbSet
+                .Include(a => a.Student)
+                .Include(a => a.Session)
+                .Where(attendance => attendance.StudentId == studentId && attendance.Session.CourseId == courseId).ToList();
+        }
+
+        public Attendance GetAttendancesOfAStudentInSession(int studentId, int sessionId)
+        {
+            return _dbSet
+                .Include(a => a.Student)
+                .Include(a => a.Session)
+                .SingleOrDefault(attendance => attendance.StudentId == studentId && attendance.SessionId == sessionId);
+        }
+
+        public Attendance GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Attendance entity)
         {
             CourseManagementContext context = new CourseManagementContext();
             var tracker = context.Attach(entity);

@@ -1,0 +1,211 @@
+﻿@page
+@model CourseManagement.Pages.Teacher.ScheduleModel
+
+@{
+    ViewData["Title"] = "Schedule";
+    Layout = "_Layout_Teacher";
+}
+
+<h1>Schedule</h1>
+
+
+<form method="post">
+
+        <div class="form-group">
+        <label>Month</label>
+
+            <input asp-for="@Model.Month" type="number" min="1" max="12" step="1" value="@Model.Month" placeholder="Enter year" />
+            <span asp-validation-for="@Model.Month" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+        <label>Year</label>
+
+            <input asp-for="@Model.Year" type="number" min="2002" max="4444" step="1" value="@Model.Year" placeholder="Enter year" />
+            <span asp-validation-for="@Model.Year" class="text-danger"></span>
+        </div>
+    
+    <button class="submit btn btn-primary" id="okButton" value="Chart">OK</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].Teacher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].Room)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].Slot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].CanceledCheck)
+            </th>
+            <th>
+                
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Session) {
+            @if(item.Date == DateTime.Today)
+            {
+                <tr style="background-color:royalblue">
+             @{ 
+       var date = item.Date.ToShortDateString();
+     }
+            <td>
+                @Html.DisplayFor(modelItem => date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.RoomNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slot)
+            </td>
+             @{ 
+       var startTime = item.StartTime.ToShortTimeString();
+     }
+            <td>
+                @Html.DisplayFor(modelItem => startTime)
+            </td>
+             @{ 
+       var endTime = item.EndTime.ToShortTimeString();
+     }
+            <td>
+                @Html.DisplayFor(modelItem => endTime)
+            </td>
+            @if (item.CanceledCheck != null && item.CanceledCheck.Value)
+            {
+                <td>
+                    Yes
+                </td>
+            }
+                else
+                {
+                    <td>
+                        No
+                    </td>
+                }
+               @* @if(Model.Attendances.Count()<0 && Model.Attendances[item.Id] != null)
+                {
+                <td>
+                    Not Yet
+                </td>
+                } else if(Model.Attendances.Count()>0 && Model.Attendances[item.Id].AttendanceCheck.Value)
+                {
+                <td>
+                    Attended
+                </td>
+                }else if(Model.Attendances.Count()>0 && !Model.Attendances[item.Id].AttendanceCheck.Value)
+                {
+                <td>
+                    Absenced
+                </td>
+                }else if(Model.Attendances.Count()<=0)
+                {
+                <td>
+                    Not yet
+                </td>
+                }*@
+        </tr>
+            }
+            else
+            {
+                
+            
+            <tr style="background-color:lightblue">
+             @{ 
+       var date = item.Date.ToShortDateString();
+     }
+            <td>
+                @Html.DisplayFor(modelItem => date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.RoomNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slot)
+            </td>
+             @{ 
+       var startTime = item.StartTime.ToShortTimeString();
+     }
+            <td>
+                @Html.DisplayFor(modelItem => startTime)
+            </td>
+             @{ 
+       var endTime = item.EndTime.ToShortTimeString();
+     }
+            <td>
+                @Html.DisplayFor(modelItem => endTime)
+            </td>
+            @if (item.CanceledCheck != null && item.CanceledCheck.Value)
+            {
+                <td>
+                    Yes
+                </td>
+            }
+                else
+                {
+                    <td>
+                        No
+                    </td>
+                }
+                @*@if(Model.Attendances.Count()<0 && Model.Attendances[item.Id] != null)
+                {
+                <td>
+                    Not Yet
+                </td>
+                } else if(Model.Attendances.Count()>0 && Model.Attendances[item.Id].AttendanceCheck.Value)
+                {
+                <td>
+                    Attended
+                </td>
+                }else if(Model.Attendances.Count()>0 && !Model.Attendances[item.Id].AttendanceCheck.Value)
+                {
+                <td>
+                    Absenced
+                </td>
+                }else if(Model.Attendances.Count()<=0)
+                {
+                <td>
+                    Not yet
+                </td>
+                }*@
+                @if(item.Date <= DateTime.Today)
+                {
+                    <td>
+                        <a asp-page="./CheckStudentAttendance" asp-route-sessionId="@item.Id">Check Student Attendance</a> 
+                    </td>
+                } else{
+                    <td></td>
+                }
+                </tr>}
+}
+    </tbody>
+</table>

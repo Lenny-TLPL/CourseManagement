@@ -8,6 +8,7 @@ namespace CourseManangementModels.Models
         public Major()
         {
             Students = new HashSet<Student>();
+            Subjects = new HashSet<Subject>();
         }
 
         public int Id { get; set; }
@@ -15,5 +16,7 @@ namespace CourseManangementModels.Models
         public string? Description { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
+
+        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

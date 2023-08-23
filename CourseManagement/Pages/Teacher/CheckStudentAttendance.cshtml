@@ -1,0 +1,119 @@
+﻿@page
+@model CourseManagement.Pages.Teacher.CheckStudentAttendanceModel
+
+@{
+    ViewData["Title"] = "CheckStudentAttendance";
+     Layout = "_Layout_Teacher";
+}
+
+<h1>CheckStudentAttendance</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.StudentName)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Term)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.GraduationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.Major)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].Student.UserBasic)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances[0].AttendanceCheck)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Attendances) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Student.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Term)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.GraduationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Major.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.UserBasic.Email)
+            </td>*@
+            @if(item.AttendanceCheck.Value)
+                {
+                <td>
+                    Attended
+                </td>
+                }else if(!item.AttendanceCheck.Value)
+                {
+                <td>
+                    Absence
+                </td>
+                }
+            <td>
+                @*<a asp-page="./CheckStudentAttendance" asp-route-sessionId="@item.SessionId" asp-route-studentId="@item.StudentId" asp-route-action="Attended">Attended</a> |
+                <a asp-page="./CheckStudentAttendance" asp-route-sessionId="@item.SessionId" asp-route-studentId="@item.StudentId" asp-route-action="Absence">Absence</a>*@
+                @*|
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+                <form method="post">
+                    <input hidden name="studentId" type="number" value="@item.StudentId"/>
+                    <input hidden name="sessionId" type="number" value="@item.SessionId"/>
+                    <button class="submit btn btn-primary" id="okButton" name="action" value="Attended">Attended</button>
+                    <button class="submit btn btn-primary" id="okButton" name="action" value="Absence">Absence</button>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

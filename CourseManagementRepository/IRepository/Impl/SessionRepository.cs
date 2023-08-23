@@ -32,12 +32,20 @@ namespace CourseManagementRepository.IRepository
 
         public IEnumerable<Session> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet
+                .Include(a => a.Course)
+                .Include(a => a.Room)
+                .Include(a => a.Teacher)
+                .ToList();
         }
 
         public Session GetById(int id)
         {
-            return _dbSet.SingleOrDefault(attendance => attendance.Id == id);
+            return _dbSet
+                .Include(a => a.Course)
+                .Include(a => a.Room)
+                .Include(a => a.Teacher)
+                .SingleOrDefault(attendance => attendance.Id == id);
         }
 
         public void Update(Session entity)

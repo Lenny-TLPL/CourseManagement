@@ -8,39 +8,44 @@ using System.Threading.Tasks;
 
 namespace CourseManagementRepository.IRepository
 {
-    public class CoursePrerequisiteRepository : ICoursePrerequisiteRepository
+    public class SubjectPrerequisiteRepository : ISubjectPrerequisiteRepository
     {
         private readonly CourseManagementContext _context;
-        private readonly DbSet<CoursePrerequisite> _dbSet;
+        private readonly DbSet<SubjectPrerequisite> _dbSet;
 
-        public CoursePrerequisiteRepository()
+        public SubjectPrerequisiteRepository()
         {
             _context = new CourseManagementContext();
-            _dbSet = _context.Set<CoursePrerequisite>();
+            _dbSet = _context.Set<SubjectPrerequisite>();
         }
-        public void Create(CoursePrerequisite entity)
+        public void Create(SubjectPrerequisite entity)
         {
             _dbSet.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Delete(CoursePrerequisite entity)
+        public void Delete(SubjectPrerequisite entity)
         {
             _dbSet.Remove(entity);
             _context.SaveChanges();
         }
 
-        public IEnumerable<CoursePrerequisite> GetAll()
+        public IEnumerable<SubjectPrerequisite> GetAll()
         {
             return _dbSet.ToList();
         }
 
-        public CoursePrerequisite GetById(int id)
+        public SubjectPrerequisite GetById(int id)
         {
-            return _dbSet.SingleOrDefault(attendance => attendance.CourseId == id);
+            return _dbSet.SingleOrDefault(attendance => attendance.SubjectId == id);
         }
 
-        public void Update(CoursePrerequisite entity)
+        public List<SubjectPrerequisite> GetCoursePrerequisites(int subjectId)
+        {
+            return _dbSet.Where(course => course.SubjectId == subjectId).ToList();    
+        }
+
+        public void Update(SubjectPrerequisite entity)
         {
             CourseManagementContext context = new CourseManagementContext();
             var tracker = context.Attach(entity);

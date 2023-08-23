@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseManagementRepository.IRepository
 {
-    internal interface IMajorRepository : IRepositoryBase<Major>
+    public interface IMajorRepository : IRepositoryBase<Major>
     {
     }
 }

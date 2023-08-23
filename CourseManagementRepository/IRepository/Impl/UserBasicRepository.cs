@@ -40,6 +40,11 @@ namespace CourseManagementRepository.IRepository.Impl
             return _dbSet.SingleOrDefault(attendance => attendance.Id == id);
         }
 
+        public UserBasic Login(string email, string password)
+        {
+            return _dbSet.SingleOrDefault(attendance => attendance.Email.Equals(email) && attendance.Password.Equals(password));
+        }
+
         public void Update(UserBasic entity)
         {
             CourseManagementContext context = new CourseManagementContext();

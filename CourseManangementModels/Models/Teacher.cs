@@ -9,6 +9,7 @@ namespace CourseManangementModels.Models
         {
             Courses = new HashSet<Course>();
             Sessions = new HashSet<Session>();
+            SubjectTeaches = new HashSet<SubjectTeach>();
         }
 
         public int Id { get; set; }
@@ -19,5 +20,6 @@ namespace CourseManangementModels.Models
         public virtual UserBasic UserBasic { get; set; } = null!;
         public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }
+        public virtual ICollection<SubjectTeach> SubjectTeaches { get; set; }
     }
 }

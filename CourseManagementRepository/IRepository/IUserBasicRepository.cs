@@ -9,5 +9,6 @@ namespace CourseManagementRepository.IRepository
 {
     public interface IUserBasicRepository : IRepositoryBase<UserBasic>
     {
+        public UserBasic Login (string email, string password);
     }
 }

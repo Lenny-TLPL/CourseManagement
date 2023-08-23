@@ -32,7 +32,10 @@ namespace CourseManagementRepository.IRepository
 
         public IEnumerable<StudentInCourse> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet
+                .Include(a => a.Course)
+                .Include(a => a.Student)
+                .ToList();
         }
 
         public StudentInCourse GetById(int id)

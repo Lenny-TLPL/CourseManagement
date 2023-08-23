@@ -37,7 +37,14 @@ namespace CourseManagementRepository.IRepository
 
         public Student GetById(int id)
         {
-            return _dbSet.SingleOrDefault(attendance => attendance.Id == id);
+            return _dbSet
+                .Include(a => a.Major)
+                .SingleOrDefault(attendance => attendance.Id == id);
+        }
+
+        public Student GetStudentByUserBasicId(int userBasicId)
+        {
+            return _dbSet.SingleOrDefault(attendance => attendance.UserBasicId == userBasicId);
         }
 
         public void Update(Student entity)

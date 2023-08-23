@@ -8,6 +8,7 @@ namespace CourseManangementModels.Models
         public Course()
         {
             Sessions = new HashSet<Session>();
+            StudentInCourses = new HashSet<StudentInCourse>();
         }
 
         public int Id { get; set; }
@@ -23,5 +24,6 @@ namespace CourseManangementModels.Models
         public virtual Subject Subject { get; set; } = null!;
         public virtual Teacher? Teacher { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }
+        public virtual ICollection<StudentInCourse> StudentInCourses { get; set; }
     }
 }

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace CourseManagementRepository.IRepository
 {
-    public interface ICoursePrerequisiteRepository : IRepositoryBase<CoursePrerequisite>
+    public interface ISubjectPrerequisiteRepository : IRepositoryBase<SubjectPrerequisite>
     {
+        public List<SubjectPrerequisite> GetCoursePrerequisites(int courseId); 
     }
 }

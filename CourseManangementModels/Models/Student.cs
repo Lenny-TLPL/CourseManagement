@@ -5,6 +5,12 @@ namespace CourseManangementModels.Models
 {
     public partial class Student
     {
+        public Student()
+        {
+            Attendances = new HashSet<Attendance>();
+            StudentInCourses = new HashSet<StudentInCourse>();
+        }
+
         public int Id { get; set; }
         public string StudentName { get; set; } = null!;
         public string? Image { get; set; }
@@ -20,5 +26,7 @@ namespace CourseManangementModels.Models
 
         public virtual Major Major { get; set; } = null!;
         public virtual UserBasic UserBasic { get; set; } = null!;
+        public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual ICollection<StudentInCourse> StudentInCourses { get; set; }
     }
 }

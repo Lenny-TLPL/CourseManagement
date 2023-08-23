@@ -9,5 +9,6 @@ namespace CourseManagementRepository.IRepository
 {
     public interface IStudentRepository : IRepositoryBase<Student>
     {
+        public Student GetStudentByUserBasicId(int userBasicId);
     }
 }

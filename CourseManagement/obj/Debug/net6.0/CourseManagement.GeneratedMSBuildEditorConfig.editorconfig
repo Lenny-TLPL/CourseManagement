@@ -5,41 +5,72 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
-build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CourseManagement
 build_property.RootNamespace = CourseManagement
-build_property.ProjectDir = F:\PRN221\CourseManagement\CourseManagement\
+build_property.ProjectDir = H:\PRN221\CourseManagement\CourseManagement\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = F:\PRN221\CourseManagement\CourseManagement
+build_property.MSBuildProjectDirectory = H:\PRN221\CourseManagement\CourseManagement
 build_property._RazorSourceGeneratorDebug = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/Error.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/Index.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/Privacy.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/_ViewImports.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Student/PersonalInformation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudFxQZXJzb25hbEluZm9ybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Student/Schedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudFxTY2hlZHVsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Teacher/CheckStudentAttendance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxDaGVja1N0dWRlbnRBdHRlbmRhbmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Teacher/Schedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxTY2hlZHVsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/_ViewStart.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_Layout.cshtml]
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_Layout _Moderator.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQgX01vZGVyYXRvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-lgs02ymusa
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-my75gbgfiy
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_Layout_Student.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXRfU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-ywfx6x1nly
+
+[H:/PRN221/CourseManagement/CourseManagement/Pages/Shared/_Layout_Teacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXRfVGVhY2hlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-udrbf3f0ha

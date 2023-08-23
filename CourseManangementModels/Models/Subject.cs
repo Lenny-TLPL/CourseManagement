@@ -8,6 +8,10 @@ namespace CourseManangementModels.Models
         public Subject()
         {
             Courses = new HashSet<Course>();
+            SubjectTeaches = new HashSet<SubjectTeach>();
+            Majors = new HashSet<Major>();
+            Prerequisites = new HashSet<Subject>();
+            Subjects = new HashSet<Subject>();
         }
 
         public int Id { get; set; }
@@ -15,8 +19,12 @@ namespace CourseManangementModels.Models
         public int? Term { get; set; }
         public string? Description { get; set; }
         public int? Credit { get; set; }
-        public int? MajorId { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<SubjectTeach> SubjectTeaches { get; set; }
+
+        public virtual ICollection<Major> Majors { get; set; }
+        public virtual ICollection<Subject> Prerequisites { get; set; }
+        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

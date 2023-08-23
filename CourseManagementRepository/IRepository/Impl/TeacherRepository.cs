@@ -40,6 +40,11 @@ namespace CourseManagementRepository.IRepository
             return _dbSet.SingleOrDefault(attendance => attendance.Id == id);
         }
 
+        public Teacher GetTeacherByUserBasicId(int userBasicId)
+        {
+            return _dbSet.SingleOrDefault(attendance => attendance.UserBasicId == userBasicId);
+        }
+
         public void Update(Teacher entity)
         {
             CourseManagementContext context = new CourseManagementContext();
